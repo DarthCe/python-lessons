@@ -1,13 +1,46 @@
-#Temperature Conversion Tool
+# Temperature Conversion Tool
+# by Cesare Tidler
+
+# Initialize things to use later
 import time
-
 unit_range = ["C","F","K"]
+quit_value = ""
 
+
+# Defining conversion functions
+def celsiusToFahrenheit (c):
+    f = float(((c/5)*9)+32)
+    return f
+    
+def fahrenheitToCelsius (f):
+    c = float(((f-32)*5)/9)
+    return c
+    
+def celsiusToKelvin (c):
+    k = float(c+273.15)
+    return k
+    
+def kelvinToCelsius (k):
+    c = float(k-273.15)
+    return c
+    
+def fahrenheitToKelvin (f):
+    k = float((((f-32)*5)/9)+273.15)
+    return k
+    
+def kelvinToFahrenheit (k):
+    f = float((((k-273.15)/5)*9)+32)
+    return f
+
+
+# Start the program
 print("Welcome to the Temperature Conversion Tool!")
 time.sleep(2)
 
+
 # Loop forever
-while True:
+while quit_value != "Q":
+
 
     # Get the starting unit
     convert_from = input("\nWhat do you want to convert from? Type C for Celsius, F for Fahrenheit, or K for Kelvin: ").strip().upper()
@@ -18,8 +51,8 @@ while True:
     # Get the unit to convert to
     time.sleep(1)
     convert_to = input("\nWhat do you want to convert to? Type C for Celsius, F for Fahrenheit, or K for Kelvin: ").strip().upper()
-    while convert_to not in unit_range:
-        convert_to = input("Please only type C for Celsius, F for Fahrenheit, or K for Kelvin: ").strip().upper()
+    while (convert_to not in unit_range) or (convert_to == convert_from):
+        convert_to = input("Please only type either C, F, or K, and make sure it's different than the one you're converting from: ").strip().upper()
 
 
     # Create a string with the full name of their convert to and from
@@ -43,47 +76,26 @@ while True:
     time.sleep(1)
 
 
-    # Defining conversion functions
-    def celsiusToFahrenheit ():
-        converted_temp = float(((temp/5)*9)+32)
-        print("\n" + str(temp) + " in Celsius is " + str(converted_temp) + " in Fahrenheit!")
-        
-    def fahrenheitToCelsius ():
-        converted_temp = float(((temp-32)*5)/9)
-        print("\n" + str(temp) + " in Fahrenheit is " + str(converted_temp) + " in Celsius!")
-        
-    def celsiusToKelvin ():
-        converted_temp = float(temp+273.15)
-        print("\n" + str(temp) + " in Celsius is " + str(converted_temp) + " in Kelvin!")
-        
-    def kelvinToCelsius ():
-        converted_temp = float(temp-273.15)
-        print("\n" + str(temp) + " in Kelvin is " + str(converted_temp) + " in Celsius!")
-        
-    def fahrenheitToKelvin ():
-        converted_temp = float((((temp-32)*5)/9)+273.15)
-        print("\n" + str(temp) + " in Fahrenheit is " + str(converted_temp) + " in Kelvin!")
-        
-    def kelvinToFahrenheit ():
-        converted_temp = float((((temp-273.15)/5)*9)+32)
-        print("\n" + str(temp) + " in Kelvin is " + str(converted_temp) + " in Fahrenheit!")
-
-
     # Do the conversions
     if convert_from == "Celsius" and convert_to == "Fahrenheit":
-        celsiusToFahrenheit()
-
+        converted_temp = celsiusToFahrenheit(temp)
+        
     elif convert_from == "Fahrenheit" and convert_to == "Celsius":
-        fahrenheitToCelsius()
+        converted_temp = fahrenheitToCelsius(temp)
         
     elif convert_from == "Celsius" and convert_to == "Kelvin":
-        celsiusToKelvin()
+        converted_temp = celsiusToKelvin(temp)
         
     elif convert_from == "Kelvin" and convert_to == "Celsius":
-        kelvinToCelsius()
+        converted_temp = kelvinToCelsius(temp)
         
     elif convert_from == "Fahrenheit" and convert_to == "Kelvin":
-        fahrenheitToKelvin()
+        converted_temp = fahrenheitToKelvin(temp)
         
     elif convert_from == "Kelvin" and convert_to == "Fahrenheit":
-        kelvinToFahrenheit()
+        converted_temp = kelvinToFahrenheit(temp)
+
+
+    # Print the results and give the option to continue or quit
+    print("\n" + str(temp) + " in " + convert_from + " is " + str(converted_temp) + " in " + convert_to + "!")
+    quit_value = input("   If you want to quit, type Q and press Enter.  Otherwise, press Enter to run it again! ").strip().upper()
