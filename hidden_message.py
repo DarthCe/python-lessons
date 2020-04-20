@@ -27,10 +27,8 @@ message = str(input("Enter your message to encrypt here: "))
 
 
 # Replace the characters with encrypted characters    
-string_to_build = '' # create an empty string that we'll build with characters from the message
-for letter in message: # loops over each character in the message    
-    mapping = str.maketrans(in_values,out_values) # creates the mapping which gets passed into the translate function
-    string_to_build = message.translate(mapping) # creates the string using the translate function
+mapping = str.maketrans(in_values,out_values) # creates the mapping which gets passed into the translate function
+string_to_build = message.translate(mapping) # creates the string using the translate function
 
 
 # Reverse the string
